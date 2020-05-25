@@ -14,18 +14,20 @@ class CartController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(Cart $cart, Product $product)
+    public function index(Cart $cart)
     {
-        //SELECT * FROM `carts`, `products` WHERE `carts`.`product_id` = `products`.`id`
         
-        $result = DB::table('carts','products')
-            ->where('product_id' , 'products.id')
-            ->get();
+        //SELECT * FROM `carts`, `products` WHERE `carts`.`product_id` = `products`.`id`
+        //$cart;
+       // $result = DB::table('carts','products')
+            // ->where('product_id' , 'products.id')
+            // ->get();
         //Retourne la vue des produits (panier.blade.php)
         //return view('panier', ['carts' => $result]);
         //Retourne la liste des produits en JsON
-        dd($result);
-        return  $result;
+       // dd($cart);
+       
+        return $cart->with('Product')->get();
     }
 
     /**
