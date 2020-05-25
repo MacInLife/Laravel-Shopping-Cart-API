@@ -14,7 +14,8 @@
 ## Backend API Laravel
 - Créer une API sous Laravel pour mettre en place les fonctionnalités du panier.
 Afin de vérifier son bon fonctionnement, ainsi que le respect du cahier des charges et des critères d’évaluation fournis ci-dessous, le code source rendu sera exécuté et vérifié par une suite de tests automatisés écrits par l’enseignant.<br>
-***Attention*** **: Sachant que ces fonctionnalités seront vérifiées par des tests automatisés, merci de respecter ces spécifications à la lettre. Ceci inclut notamment : le nom des routes, la structure des objets JSON à produire, les chaines de caractères fournies…**
+
+**_Attention_ : Sachant que ces fonctionnalités seront vérifiées par des tests automatisés, merci de respecter ces spécifications à la lettre. Ceci inclut notamment : le nom des routes, la structure des objets JSON à produire, les chaines de caractères fournies…**
 
 ## Modèle de données
 Toutes les données manipulées par l’API doivent être stockées dans une base de données.
@@ -35,6 +36,93 @@ carts
 ```
 
 Vous devez créer les migrations et les seeders pour la création de ces tables dans votre base de données.
+
+### A. Crée les 3 fichier directement (Migration, Ressources (fct° index etc..), Controller)
+```zsh
+php artisan make:model Products -mrc
+php artisan make:model Carts -mrc
+```
+
+### B. Compléter et lancer les migrations 
+Pour les produits : 
+```php
+ Schema::create('products', function (Blueprint $table) {
+            $table->id();
+            $table->timestamps();
+            $table->string('name');
+            $table->float('price', 8,2);
+            $table->text('description');
+        });
+```
+
+Pour le panier :
+```php
+  Schema::create('carts', function (Blueprint $table) {
+            $table->id();
+            $table->timestamps();
+            $table->integer('quantity')->unsigned();
+            $table->integer('product_id')->unsigned();
+        });
+```
+
+- Lancer la migration dans la BDD
+`php artisan migrate`
+
+### C. Création des seeders
+```zsh
+php artisan make:seed ProductsTablesSeeder
+php artisan make:seed CartsTablesSeeder
+```
+
+Ajout des imports et complétion du contenu :
+- Pour les produits
+```php
+//Add use Faker
+use Faker\Factory as Faker;
+use App\Product;
+public function run()
+    {
+        //Permet de générer des fausses données 'fr_FR' en français
+        $faker = Faker::create('fr_FR');
+
+        //Boucle de création des faux users
+        for ($i = 0; $i < 10; $i++) {
+            $product = new Product();
+            $product->name = $faker->name();
+            $product->price = $faker->randomNumber(10);
+            $product->text = $faker->text();
+        }
+    }
+```
+
+- Pour le panier
+ ```php
+//Add use Faker
+use Faker\Factory as Faker;
+use App\Cart;
+public function run()
+    {
+        //Permet de générer des fausses données 'fr_FR' en français
+         $faker = Faker::create('fr_FR');
+
+         //Boucle de création des faux users
+         for ($i = 0; $i < 10; $i++) {
+             $cart = new Cart();
+             $cart->quantity = $faker->randomDigit();
+             $cart->product_id = $faker->numberBetween(1, 9);
+         }
+    }
+``` 
+
+Liaison du faux contenu avec la BDD :
+ - Appel dans le fichier "DatabaseSeeder.php"
+```php
+$this->call(ProductsTableSeeder::class);
+$this->call(CartsTableSeeder::class);
+```
+
+Lancer les fausses données en BDD :
+```php artisan db:seed```
 
 ## Interfaces
 Les routes doivent être capables d’extraire les paramètres passés dans le corps de chaque requête au format `application/json` .<br>
