@@ -53,10 +53,69 @@ La réponse envoyée par chacune de ces routes doit aussi être au format JSON.
 ### Route GET /api/products
 Cette route permet de lister les produits de la base de données.
 - Propriétés JSON en réponse de chaque requête :
---  Tableau listant les produits présents en base de données. Pour chaque produit :
---- id
---- created_at
---- updated_at
---- name
---- price
---- description
+    -  Tableau listant les produits présents en base de données. Pour chaque produit :
+       - id
+       - created_at
+       - updated_at
+       - name
+       - price
+       - description
+
+### Route GET /api/cart
+Cette route permet de lister les produits de la base de données.
+- Propriétés JSON en réponse de chaque requête :
+    - Tableau listant les produits dans le panier. Pour chaque produit :
+        - id
+        - created_at
+        - updated_at
+        - product_id
+        - quantity
+        - product
+            - id
+            - created_at
+            - updated_at
+            - name
+            - price
+            - description
+
+### Route POST /api/cart
+Cette route permet d'ajouter un produit dans le panier.
+- Propriétés JSON attendues dans le corps de la requête :
+    - `product_id` : identifiant unique du produit à ajouter
+- Propriétés JSON en réponse de chaque requête :
+    - quantity
+    - product
+    - id
+    - created_at
+    - updated_at
+    - name
+    - price
+    - description
+
+Cas d’erreurs :
+- si `product_id` n’est pas présent en paramètre de la requête : retourner un code HTTP `422` et le message d'erreur générique de Laravel.
+- si `product_id` n’est associé à aucun produit stocké dans la base de données : retourner un code HTTP `404` et le message d'erreur générique de Laravel.
+
+### Route DELETE /api/cart
+Cette route permet de vider le panier.
+- Propriétés JSON en réponse de chaque requête :
+    - retourner un code HTTP `200` et une réponse `null`
+  
+### Route DELETE /api/cart/{product_id}
+Cette route permet de supprimer un produit du panier.
+- Paramètres attendus dans l’URL de la requête :
+    - `product_id` : identifiant unique du produit à supprimer du panier
+- Propriétés JSON en réponse de chaque requête :
+    - Retourner un code HTTP `200` et une réponse `null`
+
+Cas d’erreurs :
+- si `product_id` n’est associé à aucun produit stocké dans la base de données : retourner un code HTTP `404` et le message d'erreur générique de Laravel.
+
+## Mise en production
+Vous avez le choix de mettre en production sur le serveur de choix.
+Vous pouvez utiliser **Heroku** pour déployer votre application web.
+
+## Rendus
+Vous devrez fournir les URLs suivantes :
+- l'URL du ou des dépôts **GitHub** contenant le code source et l’historique de commits
+- l'URL sur laquelle l’**application web et/ou l'API** ont été déployés en production
