@@ -13,7 +13,7 @@
 
 ## Backend API Laravel
 - Créer une API sous Laravel pour mettre en place les fonctionnalités du panier.
-Afin de vérifier son bon fonctionnement, ainsi que le respect du cahier des charges et des critères d’évaluation fournis ci-dessous, le code source rendu sera exécuté et vérifié par une suite de tests automatisés écrits par l’enseignant.
+Afin de vérifier son bon fonctionnement, ainsi que le respect du cahier des charges et des critères d’évaluation fournis ci-dessous, le code source rendu sera exécuté et vérifié par une suite de tests automatisés écrits par l’enseignant.<br>
 ***Attention*** **: Sachant que ces fonctionnalités seront vérifiées par des tests automatisés, merci de respecter ces spécifications à la lettre. Ceci inclut notamment : le nom des routes, la structure des objets JSON à produire, les chaines de caractères fournies…**
 
 ## Modèle de données
@@ -52,11 +52,11 @@ La réponse envoyée par chacune de ces routes doit aussi être au format JSON.
 
 ### Route GET /api/products
 Cette route permet de lister les produits de la base de données.
-* Propriétés JSON en réponse de chaque requête :
-**  Tableau listant les produits présents en base de données. Pour chaque produit :
-*** id
-*** created_at
-*** updated_at
-*** name
-*** price
-*** description
+- Propriétés JSON en réponse de chaque requête :
+--  Tableau listant les produits présents en base de données. Pour chaque produit :
+--- id
+--- created_at
+--- updated_at
+--- name
+--- price
+--- description
