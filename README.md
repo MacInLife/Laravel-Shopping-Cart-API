@@ -65,7 +65,7 @@ Pour le panier :
         });
 ```
 
-- Lancer la migration dans la BDD
+- Lancer la migration dans la BDD :
 `php artisan migrate`
 
 ### C. Création des seeders
