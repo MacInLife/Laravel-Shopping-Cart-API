@@ -16,8 +16,8 @@ class ProductController extends Controller
     {
         //
         $products = $product->get();
-          //Retourne la vue des produits (index.blade.php)
-          //return view('index', ['products' => $products]);
+          //Retourne la vue des produits (products.blade.php)
+          //return view('produits', ['products' => $products]);
           //Retourne la liste des produits en JsON
           return  $products;
     }
@@ -49,7 +49,7 @@ class ProductController extends Controller
      * @param  \App\Products  $products
      * @return \Illuminate\Http\Response
      */
-    public function show(Products $products)
+    public function show(Product $product)
     {
         //
     }
@@ -60,7 +60,7 @@ class ProductController extends Controller
      * @param  \App\Products  $products
      * @return \Illuminate\Http\Response
      */
-    public function edit(Products $products)
+    public function edit(Product $product)
     {
         //
     }
@@ -72,7 +72,7 @@ class ProductController extends Controller
      * @param  \App\Products  $products
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Products $products)
+    public function update(Request $request, Product $product)
     {
         //
     }
@@ -83,7 +83,7 @@ class ProductController extends Controller
      * @param  \App\Products  $products
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Products $products)
+    public function destroy(Product $product)
     {
         //
     }

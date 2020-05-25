@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Cart;
+use App\Product;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class CartController extends Controller
 {
@@ -12,9 +14,18 @@ class CartController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Cart $cart, Product $product)
     {
-        //
+        //SELECT * FROM `carts`, `products` WHERE `carts`.`product_id` = `products`.`id`
+        
+        $result = DB::table('carts','products')
+            ->where('product_id' , 'products.id')
+            ->get();
+        //Retourne la vue des produits (panier.blade.php)
+        //return view('panier', ['carts' => $result]);
+        //Retourne la liste des produits en JsON
+        dd($result);
+        return  $result;
     }
 
     /**
@@ -44,7 +55,7 @@ class CartController extends Controller
      * @param  \App\Carts  $carts
      * @return \Illuminate\Http\Response
      */
-    public function show(Carts $carts)
+    public function show(Cart $cart)
     {
         //
     }
@@ -55,7 +66,7 @@ class CartController extends Controller
      * @param  \App\Carts  $carts
      * @return \Illuminate\Http\Response
      */
-    public function edit(Carts $carts)
+    public function edit(Cart $cart)
     {
         //
     }
@@ -67,7 +78,7 @@ class CartController extends Controller
      * @param  \App\Carts  $carts
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Carts $carts)
+    public function update(Request $request, Cart $cart)
     {
         //
     }
@@ -78,7 +89,7 @@ class CartController extends Controller
      * @param  \App\Carts  $carts
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Carts $carts)
+    public function destroy(Cart $cart)
     {
         //
     }

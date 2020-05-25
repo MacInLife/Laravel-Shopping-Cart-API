@@ -160,9 +160,9 @@ Route::delete('cart/{productId}' , 'CartController@delete');
 - Dans web.php voici les routes (pas utile pour ce qui est demander):
 ```php
 //Liste les produits de la base  de données    
-Route::get('products' , 'ProductController@index')->name('index');
+Route::get('products' , 'ProductController@index')->name('produits');
 //Renvoi les produits et leurs quantités présent dans le panier
-Route::get('cart' , 'CartController@index');
+Route::get('cart' , 'CartController@index')->name('panier');
 //Ajoute un produit dans le panier
 Route::post('cart' , 'CartController@store');
 //Vide le panier (get)
@@ -189,15 +189,15 @@ Dans le controller ProductController :
     {
         //
         $products = $product->get();
-          //Retourne la vue des produits (index.blade.php)
-          //return view('index', ['products' => $products]);
+          //Retourne la vue des produits (produits.blade.php)
+          return view('produits', ['products' => $products]);
           //Retourne la liste des produits en JSON
-          return  $products;
+          //return  $products;
     }
 ```
 
 ### Route GET /api/cart
-Cette route permet de lister les produits de la base de données.
+Cette route permet de lister les produits dans le panier de la base de données.
 - Propriétés JSON en réponse de chaque requête :
     - Tableau listant les produits dans le panier. Pour chaque produit :
         - id

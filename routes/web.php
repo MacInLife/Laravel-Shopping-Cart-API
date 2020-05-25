@@ -17,9 +17,9 @@ use Illuminate\Support\Facades\Route;
 //     return view('welcome');
 // });
 //Liste les produits de la base  de données    
-Route::get('products' , 'ProductController@index')->name('index');
+Route::get('products' , 'ProductController@index')->name('produits');
 //Renvoi les produits et leurs quantités présent dans le panier
-Route::get('cart' , 'CartController@index');
+Route::get('cart' , 'CartController@index')->name('panier');
 //Ajoute un produit dans le panier
 Route::post('cart' , 'CartController@store');
 //Vide le panier (get)
