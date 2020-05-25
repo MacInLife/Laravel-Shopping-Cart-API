@@ -5,7 +5,7 @@ use Illuminate\Database\Seeder;
 use Faker\Factory as Faker;
 use App\Cart;
 
-class CartsTablesSeeder extends Seeder
+class CartsTableSeeder extends Seeder
 {
     /**
      * Run the database seeds.

@@ -70,8 +70,8 @@ Pour le panier :
 
 ### C. Création des seeders
 ```zsh
-php artisan make:seed ProductsTablesSeeder
-php artisan make:seed CartsTablesSeeder
+php artisan make:seed ProductsTableSeeder
+php artisan make:seed CartsTableSeeder
 ```
 
 Ajout des imports et complétion du contenu :
