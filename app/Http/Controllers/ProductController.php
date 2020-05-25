@@ -12,9 +12,14 @@ class ProductController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Product $product)
     {
         //
+        $products = $product->get();
+          //Retourne la vue des produits (index.blade.php)
+          //return view('index', ['products' => $products]);
+          //Retourne la liste des produits en JsON
+          return  $products;
     }
 
     /**

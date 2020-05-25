@@ -139,6 +139,38 @@ La réponse envoyée par chacune de ces routes doit aussi être au format JSON.
 | DELETE  | /api/cart             | CartController@destroy  | Vide le panier                                                |
 | DELETE  | /api/cart/{productId} | CartController@delete   | Supprime un produit du panier                                 |
 
+- Dans api.php voici les routes :
+```php
+//Affiche tous les produits
+Route::apiResource('/products', 'ProductController');
+//Affiche le panier
+Route::apiResource('/cart', 'CartController');
+ //Liste les produits de la base  de données    
+Route::get('products' , 'ProductController@index');
+//Renvoi les produits et leurs quantités présent dans le panier
+Route::get('cart' , 'CartController@index');
+//Ajoute un produit dans le panier
+Route::post('cart' , 'CartController@store');
+//Vide le panier (get)
+Route::delete('cart' , 'CartController@destroy');
+//Supprime un produit du panier  (get)
+Route::delete('cart/{productId}' , 'CartController@delete');
+```
+
+- Dans web.php voici les routes (pas utile pour ce qui est demander):
+```php
+//Liste les produits de la base  de données    
+Route::get('products' , 'ProductController@index')->name('index');
+//Renvoi les produits et leurs quantités présent dans le panier
+Route::get('cart' , 'CartController@index');
+//Ajoute un produit dans le panier
+Route::post('cart' , 'CartController@store');
+//Vide le panier (get)
+Route::delete('cart' , 'CartController@destroy');
+//Supprime un produit du panier  (get)
+Route::delete('cart/{productId}' , 'CartController@delete');
+```
+
 
 ### Route GET /api/products
 Cette route permet de lister les produits de la base de données.
@@ -150,6 +182,19 @@ Cette route permet de lister les produits de la base de données.
        - name
        - price
        - description
+
+Dans le controller ProductController :
+```php
+   public function index(Product $product)
+    {
+        //
+        $products = $product->get();
+          //Retourne la vue des produits (index.blade.php)
+          //return view('index', ['products' => $products]);
+          //Retourne la liste des produits en JSON
+          return  $products;
+    }
+```
 
 ### Route GET /api/cart
 Cette route permet de lister les produits de la base de données.
