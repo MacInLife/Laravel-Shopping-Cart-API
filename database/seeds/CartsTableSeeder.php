@@ -20,8 +20,9 @@ class CartsTableSeeder extends Seeder
          //Boucle de création des faux users
          for ($i = 0; $i < 10; $i++) {
              $cart = new Cart();
-             $cart->quantity = $faker->randomDigit();
+             $cart->quantity = $faker->randomDigitNotNull();
              $cart->product_id = $faker->numberBetween(1, 9);
+             $cart->save();
          }
     }
 }

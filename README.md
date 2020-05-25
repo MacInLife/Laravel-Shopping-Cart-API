@@ -89,8 +89,9 @@ public function run()
         for ($i = 0; $i < 10; $i++) {
             $product = new Product();
             $product->name = $faker->name();
-            $product->price = $faker->randomNumber(10);
-            $product->text = $faker->text();
+            $product->price = $faker->randomFloat($nbMaxDecimals = 2, $min = 0, $max = 8);
+            $product->description = $faker->text();
+            $product->save();
         }
     }
 ```
@@ -108,8 +109,9 @@ public function run()
          //Boucle de création des faux users
          for ($i = 0; $i < 10; $i++) {
              $cart = new Cart();
-             $cart->quantity = $faker->randomDigit();
+             $cart->quantity = $faker->randomDigitNotNull();
              $cart->product_id = $faker->numberBetween(1, 9);
+             $cart->save();
          }
     }
 ``` 
