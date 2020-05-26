@@ -298,6 +298,8 @@ Cas d’erreurs :
 Vous avez le choix de mettre en production sur le serveur de choix.
 Vous pouvez utiliser **Heroku** pour déployer votre application web.
 
+[https://webstart-laravel-shopping-cart.herokuapp.com/]
+
 ## Rendus
 Vous devrez fournir les URLs suivantes :
 - l'URL du ou des dépôts **GitHub** contenant le code source et l’historique de commits
