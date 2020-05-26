@@ -187,12 +187,11 @@ Dans le controller ProductController :
 ```php
    public function index(Product $product)
     {
-        //
         $products = $product->get();
-          //Retourne la vue des produits (produits.blade.php)
-          return view('produits', ['products' => $products]);
-          //Retourne la liste des produits en JSON
-          //return  $products;
+        //Retourne la vue des produits (produits.blade.php)
+        //return view('produits', ['products' => $products]);
+        //Retourne la liste des produits en JSON
+        return  $products;
     }
 ```
 
@@ -212,6 +211,14 @@ Cette route permet de lister les produits dans le panier de la base de données.
             - name
             - price
             - description
+
+```php
+  public function index(Cart $cart)
+    {
+        $c = $cart->with('product')->get();
+        return $c;
+    }
+```
 
 ### Route POST /api/cart
 Cette route permet d'ajouter un produit dans le panier.

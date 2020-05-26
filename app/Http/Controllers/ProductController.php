@@ -14,10 +14,9 @@ class ProductController extends Controller
      */
     public function index(Product $product)
     {
-        //
         $products = $product->get();
           //Retourne la vue des produits (products.blade.php)
-          //return view('produits', ['products' => $products]);
+          //return view('index', ['products' => $products]);
           //Retourne la liste des produits en JsON
           return  $products;
     }
