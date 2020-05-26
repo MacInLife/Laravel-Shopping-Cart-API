@@ -234,6 +234,28 @@ Cette route permet d'ajouter un produit dans le panier.
     - price
     - description
 
+```php
+  public function store(Request $request, Cart $cart)
+    {
+        //
+        //Validation
+        $validate = $request->validate([
+            'product_id' => 'required',
+        ]);
+
+        //Création
+        $cart = new Cart;
+        $cart->quantity = $request->quantity;
+        $cart->product_id = $request->product_id;
+   
+        //Sauvegarde du produit
+        $cart->save();
+
+        //Redirection
+       return $cart->with('product')->get();
+    }
+```
+
 Cas d’erreurs :
 - si `product_id` n’est pas présent en paramètre de la requête : retourner un code HTTP `422` et le message d'erreur générique de Laravel.
 - si `product_id` n’est associé à aucun produit stocké dans la base de données : retourner un code HTTP `404` et le message d'erreur générique de Laravel.

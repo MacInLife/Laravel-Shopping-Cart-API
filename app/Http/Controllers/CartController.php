@@ -44,9 +44,24 @@ class CartController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(Request $request, Cart $cart)
     {
         //
+        //Validation
+        $validate = $request->validate([
+            'product_id' => 'required',
+        ]);
+
+        //Création
+        $cart = new Cart;
+        $cart->quantity = $request->quantity;
+        $cart->product_id = $request->product_id;
+     
+        //Sauvegarde du produit
+        $cart->save();
+
+        //Redirection
+        return $cart->with('product')->get();
     }
 
     /**
