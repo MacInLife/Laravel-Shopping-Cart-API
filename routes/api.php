@@ -28,6 +28,8 @@ Route::get('cart' , 'CartController@index');
 //Ajoute un produit dans le panier
 Route::post('cart' , 'CartController@store');
 //Vide le panier (get)
+//Route::middleware('api')->delete('cart', 'CartController@destroy');
 Route::delete('cart' , 'CartController@destroy');
 //Supprime un produit du panier  (get)
-Route::delete('cart/{productId}' , 'CartController@delete');
+//Route::middleware('api')->delete('cart/{product_id}', 'CartController@delete');
+Route::post('cart/{product_id}' , 'CartController@delete');

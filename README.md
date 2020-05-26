@@ -152,9 +152,11 @@ Route::get('cart' , 'CartController@index');
 //Ajoute un produit dans le panier
 Route::post('cart' , 'CartController@store');
 //Vide le panier (get)
+//Route::middleware('api')->delete('cart', 'CartController@destroy');
 Route::delete('cart' , 'CartController@destroy');
 //Supprime un produit du panier  (get)
-Route::delete('cart/{productId}' , 'CartController@delete');
+//Route::middleware('api')->delete('cart/{product_id}', 'CartController@delete');
+Route::post('cart/{product_id}' , 'CartController@delete');
 ```
 
 - Dans web.php voici les routes (pas utile pour ce qui est demander):
@@ -168,7 +170,7 @@ Route::post('cart' , 'CartController@store');
 //Vide le panier (get)
 Route::delete('cart' , 'CartController@destroy');
 //Supprime un produit du panier  (get)
-Route::delete('cart/{productId}' , 'CartController@delete');
+Route::post('cart/{product_id}' , 'CartController@delete');
 ```
 
 
@@ -264,6 +266,14 @@ Cas d’erreurs :
 Cette route permet de vider le panier.
 - Propriétés JSON en réponse de chaque requête :
     - retourner un code HTTP `200` et une réponse `null`
+
+```php
+ public function destroy( Cart $cart)
+    {
+       $c = $cart->whereNotNull('id')->delete();
+       return  $c;
+    }
+```
   
 ### Route DELETE /api/cart/{product_id}
 Cette route permet de supprimer un produit du panier.
@@ -272,8 +282,17 @@ Cette route permet de supprimer un produit du panier.
 - Propriétés JSON en réponse de chaque requête :
     - Retourner un code HTTP `200` et une réponse `null`
 
+```php
+    public function delete(Cart $cart, Request $request)
+    {
+       $c = $cart->where('product_id', '=', $request->product_id)->delete();
+      return  $c;
+    }
+```
+
 Cas d’erreurs :
 - si `product_id` n’est associé à aucun produit stocké dans la base de données : retourner un code HTTP `404` et le message d'erreur générique de Laravel.
+
 
 ## Mise en production
 Vous avez le choix de mettre en production sur le serveur de choix.
