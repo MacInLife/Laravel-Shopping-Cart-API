@@ -26,3 +26,7 @@ Route::post('cart', 'CartController@store');
 Route::delete('cart', 'CartController@destroy');
 //Supprime un produit du panier  (get)
 Route::delete('cart/{productId}', 'CartController@delete');
+
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');
