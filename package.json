@@ -30,7 +30,7 @@
         "css-what": "^3.4.2",
         "cssnano": "^4.1.11",
         "fsevents": "^1.2.13",
-        "normalize-url": "^6.0.1",
+        "normalize-url": "^4.5.1",
         "postcss-normalize-url": "^4.0.1",
         "tailwindcss": "^2.0.4"
     }
